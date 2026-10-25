@@ -1,0 +1,122 @@
+/* Палитра под фон фотографии (тёмный сине-бирюзовый, #0F2432 в среднем по краям).
+   Тема одна, переключатель светлой/тёмной отключён в hugo.toml. */
+:root,
+:root[data-theme="dark"] {
+    --theme: #0f2432;
+    --entry: #16303f;
+    --primary: #e6edf1;
+    --secondary: #9fb3bf;
+    --tertiary: #2a4656;
+    --content: #d3dee4;
+    --border: #21404f;
+}
+
+/* Имя в шапке не показываем: оно уже есть рядом с фото. Страницы 404 это не касается */
+body:has(.profile) .logo > a {
+    visibility: hidden;
+}
+
+/* Главная: слева фото и соцсети под ним, справа имя, описание и опыт работы.
+   Ширина как у шапки, чтобы фото стояло у левого края, а не в узкой колонке по центру */
+.main:has(.profile) {
+    max-width: calc(var(--nav-width) + var(--gap) * 2);
+}
+
+.main .profile {
+    display: block;
+    min-height: 0;
+    text-align: left;
+}
+
+.profile .profile_inner {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    column-gap: 2.5rem;
+    align-items: start;
+}
+
+.profile .profile_side {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: sticky;
+    top: var(--gap);
+}
+
+.profile .profile_side img {
+    width: 260px;
+    height: auto;
+    border-radius: 0;
+    /* Края фото плавно растворяются в фоне страницы, стыка не видно */
+    -webkit-mask-image:
+        linear-gradient(to right, transparent, #000 22%, #000 78%, transparent),
+        linear-gradient(to bottom, transparent, #000 18%, #000 80%, transparent);
+    -webkit-mask-composite: source-in;
+    mask-image:
+        linear-gradient(to right, transparent, #000 22%, #000 78%, transparent),
+        linear-gradient(to bottom, transparent, #000 18%, #000 80%, transparent);
+    mask-composite: intersect;
+}
+
+.profile .profile_side .social-icons {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+.profile .profile_main h1 {
+    margin-top: 2rem;
+}
+
+.profile .profile_subtitle {
+    margin: 0.75rem 0;
+    color: var(--secondary);
+    line-height: 1.6;
+}
+
+/* Опыт работы */
+.profile .profile_content {
+    margin-top: 2rem;
+}
+
+.profile .profile_content h2 {
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.profile .profile_content h3 {
+    margin-top: 2.2rem;
+    margin-bottom: 0.2rem;
+}
+
+.profile .profile_content h3 + p {
+    color: var(--secondary);
+}
+
+.profile .profile_content p,
+.profile .profile_content ul {
+    margin-bottom: 0.8rem;
+}
+
+@media (max-width: 720px) {
+    .profile .profile_inner {
+        grid-template-columns: 1fr;
+    }
+
+    .profile .profile_side {
+        position: static;
+        align-items: flex-start;
+    }
+
+    .profile .profile_side img {
+        width: 200px;
+    }
+
+    .profile .profile_side .social-icons {
+        justify-content: flex-start;
+    }
+
+    .profile .profile_main h1 {
+        margin-top: 0.5rem;
+    }
+}

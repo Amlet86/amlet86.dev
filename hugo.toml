@@ -1,0 +1,42 @@
+baseURL = 'https://amlet86.dev/'
+locale = 'ru-ru'
+defaultContentLanguage = 'ru'
+title = 'Андрей Михайлов'
+theme = 'PaperMod'
+enableRobotsTXT = true
+# Сайт из одной страницы: страницы тегов, категорий и RSS не нужны
+disableKinds = ['taxonomy', 'term', 'rss']
+
+[params]
+  # Разрешает поисковикам индексировать сайт (иначе тема ставит noindex)
+  env = 'production'
+  description = 'Андрей Михайлов, руководитель команды разработки (Team lead)'
+  author = 'Андрей Михайлов'
+  defaultTheme = 'dark'
+  disableThemeToggle = true
+
+  [params.profileMode]
+    enabled = true
+    title = 'Андрей Михайлов'
+    # Каждая строка выводится с новой строки
+    subtitle = '''
+Руководитель команды разработки (Team lead).
+11 лет в IT: QA, Java-разработка, техлидство, управление командами.
+'''
+    imageUrl = 'images/photo.jpg'
+    # Квадрат 600x600 (голова и плечи); в 2 раза шире показа (260px), чтобы был чётким на HiDPI
+    imageWidth = 520
+    imageTitle = 'Андрей Михайлов'
+
+  [[params.socialIcons]]
+    name = 'github'
+    url = 'https://github.com/Amlet86'
+  [[params.socialIcons]]
+    name = 'telegram'
+    url = 'https://t.me/AM_lead'
+  [[params.socialIcons]]
+    # Иконка своя: layouts/_partials/social_icons.html
+    name = 'max'
+    title = 'MAX'
+    url = 'https://max.ru/u/f9LHodD0cOKccNba6NJ5x_EG1w2zhA9HI6z6M8mhr0-wNAep4t2883gqGZ8'
+  # TODO: ссылка на публичное резюме hh.ru, когда будет

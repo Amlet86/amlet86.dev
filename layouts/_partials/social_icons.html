@@ -1,0 +1,17 @@
+{{- /* Как в теме, плюс своя иконка для мессенджера MAX (в теме её нет) */ -}}
+<div class="social-icons">
+    {{- range site.Params.socialIcons }}
+    <a href="{{ trim .url " " | safeURL }}" target="_blank" rel="noopener noreferrer me"
+        title="{{ .title | default (.name | title) }}">
+        {{- if eq .name "max" }}
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3a9 9 0 1 1-4.2 16.96L3 21l1.1-4.6A9 9 0 0 1 12 3z" />
+            <circle cx="12" cy="12" r="3.5" />
+        </svg>
+        {{- else }}
+        {{ partial "svg.html" . }}
+        {{- end }}
+    </a>
+    {{- end }}
+</div>

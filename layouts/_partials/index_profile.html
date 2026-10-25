@@ -1,0 +1,30 @@
+{{- /* Своя раскладка главной вместо темы: слева фото и соцсети под ним, справа имя, описание
+     (каждая строка subtitle отдельной строкой) и текст content/_index.md (опыт работы) */ -}}
+<div class="profile">
+    {{- with site.Params.profileMode }}
+    <div class="profile_inner">
+        <div class="profile_side">
+            {{- with resources.Get .imageUrl }}
+            {{- /* Только по ширине: высота считается из пропорций, фото не сплющивается */}}
+            {{- $img := .Resize (printf "%dx" $.Site.Params.profileMode.imageWidth) }}
+            <img draggable="false" src="{{ $img.Permalink }}" alt="{{ site.Params.profileMode.imageTitle }}"
+                width="{{ $img.Width }}" height="{{ $img.Height }}" />
+            {{- end }}
+            {{- partial "social_icons.html" -}}
+        </div>
+
+        <div class="profile_main">
+            <h1>{{ .title | default site.Title }}</h1>
+            <p class="profile_subtitle">
+                {{- range $i, $line := split (trim .subtitle "\n ") "\n" }}
+                {{- if $i }}<br>{{ end }}{{ $line | markdownify }}
+                {{- end }}
+            </p>
+
+            {{- with $.Content }}
+            <div class="post-content profile_content">{{ . }}</div>
+            {{- end }}
+        </div>
+    </div>
+    {{- end }}
+</div>
