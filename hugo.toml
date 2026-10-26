@@ -30,7 +30,8 @@ disableKinds = ['taxonomy', 'term', 'rss']
     imageWidth = 520
     imageTitle = 'Андрей Михайлов'
 
-  # printText: как ссылка подписана в PDF-резюме (на сайте показываются только иконки)
+  # printText: как ссылка подписана в PDF-резюме (на сайте показываются только иконки).
+  # Без printText ссылки в PDF нет
   [[params.socialIcons]]
     name = 'github'
     title = 'GitHub'
@@ -46,5 +47,4 @@ disableKinds = ['taxonomy', 'term', 'rss']
     name = 'max'
     title = 'MAX'
     url = 'https://max.ru/u/f9LHodD0cOKccNba6NJ5x_EG1w2zhA9HI6z6M8mhr0-wNAep4t2883gqGZ8'
-    printText = 'профиль в MAX'
   # TODO: ссылка на публичное резюме hh.ru, когда будет

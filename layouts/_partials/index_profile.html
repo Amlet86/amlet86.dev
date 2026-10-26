@@ -31,8 +31,9 @@
                 {{- with site.Params.domain }}
                 <li>Сайт: <a href="https://{{ . }}/">{{ . }}</a></li>
                 {{- end }}
-                {{- range site.Params.socialIcons }}
-                <li>{{ .title | default (.name | title) }}: <a href="{{ .url }}">{{ .printText | default .url }}</a></li>
+                {{- /* Ссылки без printText в PDF не попадают (MAX: адрес профиля с листа не прочитать) */}}
+                {{- range where site.Params.socialIcons "printText" "!=" nil }}
+                <li>{{ .title | default (.name | title) }}: <a href="{{ .url }}">{{ .printText }}</a></li>
                 {{- end }}
             </ul>
 
