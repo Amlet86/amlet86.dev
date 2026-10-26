@@ -64,6 +64,22 @@ body:has(.profile) .logo > a {
     padding: 0;
 }
 
+.profile .resume-button {
+    align-self: center;
+    background: var(--tertiary);
+    border-radius: var(--radius);
+    padding: 0.4rem 0.9rem;
+    font-size: 0.95rem;
+}
+
+.profile .resume-button:hover {
+    background: var(--border);
+}
+
+.print-contacts {
+    display: none;
+}
+
 .profile .profile_main h1 {
     margin-top: 2rem;
 }
@@ -116,7 +132,122 @@ body:has(.profile) .logo > a {
         justify-content: flex-start;
     }
 
+    .profile .resume-button {
+        align-self: flex-start;
+    }
+
     .profile .profile_main h1 {
         margin-top: 0.5rem;
+    }
+}
+
+/* Печать и resume.pdf: та же информация, что на сайте, но на белом листе A4.
+   Фото слева вверху, рядом имя, описание и контакты текстом, ниже опыт работы на всю ширину */
+@media print {
+    @page {
+        size: A4;
+        margin: 14mm 14mm 12mm;
+    }
+
+    :root,
+    :root[data-theme="dark"] {
+        --theme: #fff;
+        --primary: #111;
+        --secondary: #444;
+        --content: #1a1a1a;
+        --border: #d0d7dc;
+    }
+
+    html,
+    body {
+        background: #fff;
+        font-size: 11pt;
+    }
+
+    .header,
+    .footer,
+    .top-link,
+    .profile .social-icons,
+    .profile .resume-button {
+        display: none !important;
+    }
+
+    .main,
+    .main:has(.profile) {
+        max-width: none;
+        padding: 0;
+    }
+
+    /* profile_main растворяется (display: contents), и его дети становятся ячейками сетки:
+       фото слева от имени, описания и контактов, а опыт работы ниже на всю ширину */
+    .profile .profile_inner {
+        grid-template-columns: 33mm 1fr;
+        column-gap: 7mm;
+    }
+
+    .profile .profile_main {
+        display: contents;
+    }
+
+    .profile .profile_side {
+        position: static;
+        grid-column: 1;
+        grid-row: 1 / span 3;
+    }
+
+    .profile .profile_main > h1,
+    .profile .profile_subtitle,
+    .print-contacts {
+        grid-column: 2;
+    }
+
+    .profile .profile_side img {
+        width: 33mm;
+        -webkit-mask-image: none;
+        mask-image: none;
+        border-radius: 3mm;
+    }
+
+    .profile .profile_main h1 {
+        margin-top: 0;
+        font-size: 22pt;
+    }
+
+    .print-contacts {
+        display: block;
+        margin: 0 0 4mm;
+        padding: 0;
+        list-style: none;
+        font-size: 10pt;
+        line-height: 1.5;
+        color: var(--secondary);
+    }
+
+    .print-contacts a {
+        color: var(--primary);
+        text-decoration: none;
+    }
+
+    .profile .profile_content {
+        grid-column: 1 / -1;
+        margin-top: 2mm;
+    }
+
+    .profile .profile_content ul {
+        list-style: disc;
+        padding-inline-start: 5mm;
+    }
+
+    .profile .profile_content h3 {
+        margin-top: 5mm;
+        break-after: avoid;
+    }
+
+    .profile .profile_content h3 + p {
+        break-after: avoid;
+    }
+
+    .profile .profile_content li {
+        break-inside: avoid;
     }
 }

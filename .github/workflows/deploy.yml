@@ -29,6 +29,19 @@ jobs:
       - name: Build
         run: hugo --minify --gc
 
+      # PDF-резюме печатается из главной (стили @media print в custom.css), поэтому в нём всегда
+      # то же, что на сайте. Страницу отдаём локально, чтобы фото и стили брались из этой сборки
+      - name: Resume PDF
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-core > /dev/null
+          hugo --minify --baseURL http://127.0.0.1:8000/ -d /tmp/print
+          python3 -m http.server 8000 -d /tmp/print > /dev/null 2>&1 &
+          sleep 2
+          google-chrome --headless=new --no-sandbox --disable-gpu --no-pdf-header-footer \
+            --virtual-time-budget=5000 --print-to-pdf=public/resume.pdf http://127.0.0.1:8000/
+          test -s public/resume.pdf
+
       - name: Deploy
         env:
           SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}

@@ -12,6 +12,8 @@ disableKinds = ['taxonomy', 'term', 'rss']
   env = 'production'
   description = 'Андрей Михайлов, руководитель команды разработки (Team lead)'
   author = 'Андрей Михайлов'
+  # Подпись «Сайт:» в PDF-резюме
+  domain = 'amlet86.dev'
   defaultTheme = 'dark'
   disableThemeToggle = true
 
@@ -28,15 +30,21 @@ disableKinds = ['taxonomy', 'term', 'rss']
     imageWidth = 520
     imageTitle = 'Андрей Михайлов'
 
+  # printText: как ссылка подписана в PDF-резюме (на сайте показываются только иконки)
   [[params.socialIcons]]
     name = 'github'
+    title = 'GitHub'
     url = 'https://github.com/Amlet86'
+    printText = 'github.com/Amlet86'
   [[params.socialIcons]]
     name = 'telegram'
+    title = 'Telegram'
     url = 'https://t.me/AM_lead'
+    printText = '@AM_lead'
   [[params.socialIcons]]
     # Иконка своя: layouts/_partials/social_icons.html
     name = 'max'
     title = 'MAX'
     url = 'https://max.ru/u/f9LHodD0cOKccNba6NJ5x_EG1w2zhA9HI6z6M8mhr0-wNAep4t2883gqGZ8'
+    printText = 'профиль в MAX'
   # TODO: ссылка на публичное резюме hh.ru, когда будет

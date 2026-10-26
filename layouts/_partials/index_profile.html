@@ -1,5 +1,6 @@
-{{- /* Своя раскладка главной вместо темы: слева фото и соцсети под ним, справа имя, описание
-     (каждая строка subtitle отдельной строкой) и текст content/_index.md (опыт работы) */ -}}
+{{- /* Своя раскладка главной вместо темы: слева фото, соцсети и кнопка резюме под ним, справа имя, описание
+     (каждая строка subtitle отдельной строкой) и текст content/_index.md (опыт работы).
+     resume.pdf собирается из этой же страницы при деплое (.github/workflows/deploy.yml) */ -}}
 <div class="profile">
     {{- with site.Params.profileMode }}
     <div class="profile_inner">
@@ -11,6 +12,9 @@
                 width="{{ $img.Width }}" height="{{ $img.Height }}" />
             {{- end }}
             {{- partial "social_icons.html" -}}
+            <a class="button resume-button" href="{{ "resume.pdf" | absURL }}" download="Михайлов Андрей.pdf">
+                <span class="button-inner">Скачать pdf</span>
+            </a>
         </div>
 
         <div class="profile_main">
@@ -20,6 +24,17 @@
                 {{- if $i }}<br>{{ end }}{{ $line | markdownify }}
                 {{- end }}
             </p>
+
+            {{- /* Только для PDF: в печати иконки без подписей бесполезны, поэтому контакты текстом */}}
+            <ul class="print-contacts">
+                {{- /* Домен из params, а не baseURL: PDF собирается с локальным baseURL */}}
+                {{- with site.Params.domain }}
+                <li>Сайт: <a href="https://{{ . }}/">{{ . }}</a></li>
+                {{- end }}
+                {{- range site.Params.socialIcons }}
+                <li>{{ .title | default (.name | title) }}: <a href="{{ .url }}">{{ .printText | default .url }}</a></li>
+                {{- end }}
+            </ul>
 
             {{- with $.Content }}
             <div class="post-content profile_content">{{ . }}</div>
