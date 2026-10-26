@@ -147,6 +147,9 @@ body:has(.profile) .logo > a {
     @page {
         size: A4;
         margin: 14mm 14mm 12mm;
+        /* Белые и поля листа, а не только область текста: иначе они прозрачные,
+           и некоторые просмотрщики показывают их тёмными */
+        background: #fff;
     }
 
     :root,
@@ -156,6 +159,8 @@ body:has(.profile) .logo > a {
         --secondary: #444;
         --content: #1a1a1a;
         --border: #d0d7dc;
+        /* Тёмная тема ставит color-scheme: dark, и Chrome красит поля листа в тёмный цвет */
+        color-scheme: light;
     }
 
     html,
